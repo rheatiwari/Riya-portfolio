@@ -877,4 +877,82 @@
         <!-- Contact Section -->
         <section class="contact" id="contact" class="reveal">
             <h2><span>📞 Let's Connect!</span></h2>
-            <p class="section-subtitle">I'd love
+            <p class="section-subtitle">I'm always interested in new opportunities and conversations</p>
+            
+            <div class="fun-fact" style="max-width: 600px; margin: 2rem auto;">
+                🎯 Fair Warning: I respond to emails like I respond to coffee - immediately and enthusiastically! ☕⚡
+            </div>
+
+            <p><strong>📧 Email:</strong></p>
+            <p><a href="mailto:triya0208@gmail.com">triya0208@gmail.com</a> (personal) | <a href="mailto:Rheatiwari2@gmail.com">Rheatiwari2@gmail.com</a> (work)</p>
+            
+            <p><strong>📱 Phone:</strong> <a href="tel:8454078250">8454078250</a></p>
+            <p><strong>🐙 GitHub:</strong> <a href="https://github.com/rheatiwari" target="_blank">github.com/rheatiwari</a></p>
+            <p><strong>💼 LinkedIn:</strong> <a href="https://linkedin.com/in/riyatiwarii" target="_blank">linkedin.com/in/riyatiwarii</a></p>
+            <p><strong>📍 Location:</strong> Thane, Maharashtra, India 🇮🇳</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/rheatiwari" class="social-icon" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/riyatiwarii" class="social-icon" title="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:triya0208@gmail.com" class="social-icon" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:8454078250" class="social-icon" title="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+        </section>
+
+        <section style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; border-radius: 15px; padding: 3rem; margin: 3rem 0;">
+            <h2 style="color: white; margin-bottom: 1.5rem;">✨ One More Thing...</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; opacity: 0.95;">I believe in the power of technology to transform lives. Whether it's through predictive analytics that save businesses millions, or a mental wellness app that helps someone through a tough day, I'm here to make a difference. 💜</p>
+            <p style="font-size: 1.1rem; opacity: 0.9;">"Great code is like great art - it works perfectly and looks beautiful doing it." 🎨💻</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>💜 Made with ☕, 🎨, and 💻 by Riya Tiwari | © 2025 All rights reserved</p>
+        <p style="margin-top: 0.5rem; opacity: 0.85;">Turning data into insights, code into magic ✨</p>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.75) {
+                    section.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
