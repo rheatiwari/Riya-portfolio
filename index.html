@@ -18,6 +18,7 @@
             --accent: #f093fb;
             --light: #f0f4ff;
             --dark: #1a1a2e;
+            --white: #ffffff;
         }
 
         html {
@@ -26,41 +27,21 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            color: #333;
+            color: #2d2d2d;
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
+            background: #f8f9ff;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-            animation: bgShift 15s ease infinite;
-        }
-
-        @keyframes bgShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, 30px); }
-        }
-
+        /* Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            background: var(--white);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
             animation: slideDown 0.8s ease;
         }
 
@@ -70,9 +51,8 @@
         }
 
         .navbar-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,19 +60,19 @@
 
         .navbar-brand {
             font-size: 1.8rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
@@ -102,6 +82,7 @@
             font-weight: 600;
             position: relative;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         .nav-links a::after {
@@ -110,9 +91,13 @@
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
         .nav-links a:hover::after {
@@ -123,26 +108,58 @@
             .nav-links { display: none; }
         }
 
+        /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
             position: relative;
             overflow: hidden;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
         }
 
         .hero-content {
             z-index: 10;
+            text-align: center;
+            max-width: 800px;
             animation: fadeInUp 1.2s ease;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(60px);
             }
             to {
                 opacity: 1;
@@ -151,42 +168,67 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
+            font-size: 4.5rem;
             font-weight: 900;
+            margin-bottom: 0.5rem;
             animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(240, 147, 251, 0.9); }
         }
 
         .hero .subtitle {
             font-size: 1.8rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.8rem;
             opacity: 0.95;
+            font-weight: 600;
         }
 
         .hero .tagline {
             font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.85;
+            margin-bottom: 3rem;
+            opacity: 0.9;
             font-style: italic;
         }
 
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(240, 147, 251, 0.8); }
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: white;
+            padding: 1.2rem 3rem;
+            background: var(--white);
             color: var(--primary);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
+            font-size: 1rem;
             transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            border: none;
             animation: bounce 2s ease infinite;
-            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         @keyframes bounce {
@@ -194,60 +236,17 @@
             50% { transform: translateY(-15px); }
         }
 
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .floating {
-            position: absolute;
-            font-size: 3rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .float1 { top: 10%; left: 10%; animation-delay: 0s; }
-        .float2 { top: 20%; right: 10%; animation-delay: 1s; }
-        .float3 { bottom: 20%; left: 20%; animation-delay: 2s; }
-        .float4 { bottom: 10%; right: 15%; animation-delay: 3s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(10deg); }
-        }
-
+        /* Container */
         .container {
-            max-width: 1100px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* Sections */
         section {
-            background: white;
-            margin: 3rem auto;
-            padding: 4rem 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            margin: 5rem auto;
             animation: slideUp 0.8s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        section > * {
-            position: relative;
-            z-index: 1;
         }
 
         @keyframes slideUp {
@@ -262,140 +261,161 @@
         }
 
         h2 {
-            font-size: 2.8rem;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+        }
+
+        h2 span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
-        .about {
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* About Section */
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
 
-        .about-text p {
-            font-size: 1.1rem;
+        .about-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
             color: #555;
             margin-bottom: 1.5rem;
             line-height: 1.9;
-            animation: fadeIn 1.2s ease;
         }
 
-        .about-stats {
+        .fun-fact {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(240, 147, 251, 0.08));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin: 2rem 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
         .stat-box {
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+            background: var(--white);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
-            border: 2px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
             transition: all 0.3s;
-            animation: popIn 0.6s ease;
-        }
-
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            border-top: 4px solid var(--primary);
         }
 
         .stat-box:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
         }
 
         .stat-box h3 {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-weight: 800;
         }
 
         .stat-box p {
             color: #666;
             font-weight: 600;
+            font-size: 0.95rem;
         }
 
         @media (max-width: 768px) {
-            .about {
+            .about-grid {
                 grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
+        /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .skill-card {
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
-            padding: 2rem;
+            background: var(--white);
+            padding: 2.5rem;
             border-radius: 15px;
-            text-align: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
-            border: 2px solid transparent;
-            animation: slideUp 0.8s ease;
+            border-bottom: 4px solid transparent;
+            text-align: center;
         }
 
         .skill-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-            border-color: var(--primary);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(102, 126, 234, 0.25);
+            border-bottom-color: var(--primary);
         }
 
         .skill-card i {
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             color: var(--primary);
             transition: all 0.3s;
         }
 
         .skill-card:hover i {
-            color: white;
-            transform: scale(1.3) rotate(10deg);
+            color: var(--secondary);
+            transform: scale(1.2) rotate(10deg);
         }
 
         .skill-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.8rem;
+            color: #2d2d2d;
+            font-weight: 700;
         }
 
         .skill-card p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
+        /* Projects Section */
         .project-card {
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+            background: var(--white);
             padding: 2.5rem;
             border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
             margin-bottom: 2rem;
+            transition: all 0.4s;
             border-left: 5px solid var(--primary);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
 
         .project-card::before {
@@ -405,14 +425,13 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s;
         }
 
         .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
-            border-left-color: var(--secondary);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 40px rgba(102, 126, 234, 0.25);
         }
 
         .project-card:hover::before {
@@ -422,13 +441,15 @@
         .project-card h3 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 1.7rem;
+            font-size: 1.6rem;
+            font-weight: 700;
         }
 
         .project-card p {
-            color: #666;
+            color: #555;
             margin-bottom: 1.5rem;
             line-height: 1.8;
+            font-size: 0.95rem;
         }
 
         .tech-tags {
@@ -442,17 +463,17 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 700;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
             transition: all 0.3s;
         }
 
         .badge:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
         }
 
         .project-links {
@@ -470,7 +491,7 @@
             transition: all 0.3s;
             border: 2px solid;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             position: relative;
@@ -499,16 +520,16 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
         }
 
         .btn-secondary {
-            background: white;
+            background: var(--white);
             color: var(--primary);
             border-color: var(--primary);
         }
@@ -516,63 +537,52 @@
         .btn-secondary:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
-        .experience-timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
+        /* Experience */
         .experience-item {
-            margin-bottom: 2.5rem;
-            padding-left: 3rem;
-            position: relative;
-            animation: slideUp 0.8s ease;
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--primary);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
+            border-left: 4px solid var(--primary);
             transition: all 0.3s;
         }
 
-        .experience-item:hover::before {
-            transform: scale(1.5);
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
         }
 
         .experience-item h3 {
             color: var(--primary);
             font-size: 1.3rem;
             margin-bottom: 0.3rem;
+            font-weight: 700;
         }
 
-        .experience-item .company {
+        .company {
             color: var(--secondary);
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .experience-item p {
-            color: #666;
+            color: #555;
             margin-bottom: 0.8rem;
-            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
+        /* Contact Section */
         .contact {
             text-align: center;
         }
 
         .contact p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin: 1.5rem 0;
             color: #555;
         }
@@ -581,27 +591,11 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
-            position: relative;
             transition: color 0.3s;
-        }
-
-        .contact a::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s;
         }
 
         .contact a:hover {
             color: var(--secondary);
-        }
-
-        .contact a:hover::after {
-            width: 100%;
         }
 
         .social-links {
@@ -628,28 +622,17 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-12px) rotate(10deg) scale(1.15);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+            transform: translateY(-10px) rotate(10deg) scale(1.15);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
         }
 
-        .fun-fact {
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            border-left: 4px solid var(--accent);
-            font-size: 1rem;
-            color: #555;
-            font-style: italic;
-        }
-
+        /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark), var(--primary));
+            background: var(--dark);
             color: white;
             text-align: center;
             padding: 3rem 2rem;
-            margin-top: 4rem;
-            position: relative;
+            margin-top: 5rem;
         }
 
         footer p {
@@ -662,35 +645,21 @@
                 font-size: 2.5rem;
             }
 
-            section {
-                padding: 2rem 1.5rem;
-                margin: 2rem auto;
-            }
-
             h2 {
                 font-size: 2rem;
             }
 
-            .project-links {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
                 flex-direction: column;
             }
 
-            .btn {
+            .cta-button {
                 width: 100%;
-                text-align: center;
             }
-
-            .social-links {
-                gap: 1.5rem;
-            }
-
-            .social-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .nav-links { display: none; }
         }
 
         .reveal {
@@ -706,6 +675,7 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="navbar-content">
             <div class="navbar-brand">
@@ -722,325 +692,189 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="floating float1">💻</div>
-        <div class="floating float2">🚀</div>
-        <div class="floating float3">✨</div>
-        <div class="floating float4">🎨</div>
-        <div class="floating" style="bottom: 15%; left: 50%;">📊</div>
-        
         <div class="hero-content">
-            <h1>Hi, I'm Riya Tiwari! 👋</h1>
+            <h1>Hi, I'm Riya Tiwari 👋</h1>
             <p class="subtitle">Full Stack Developer | Data Scientist | Analytics Expert</p>
             <p class="tagline">"Turning coffee ☕ into code 💻 and data into insights 📊"</p>
-            <div>
+            <div class="hero-buttons">
                 <a href="#projects" class="cta-button">🚀 See My Work</a>
-                <a href="#contact" class="cta-button">💌 Get In Touch</a>
+                <a href="#contact" class="cta-button secondary">💌 Let's Connect</a>
             </div>
         </div>
     </section>
 
     <div class="container">
-        <section class="about" id="about">
-            <div>
-                <h2>💫 About Me</h2>
-                <div class="about-text">
-                    <p>I'm a passionate data professional with 2+ years of experience transforming raw data into actionable insights. By day, I'm a consultant at NEC Software Solutions building predictive models with 88% accuracy. By night, I'm a full-stack developer creating beautiful web applications that make people smile. 😊</p>
+        <!-- About Section -->
+        <section id="about" class="reveal">
+            <h2><span>💫 About Me</span></h2>
+            <p class="section-subtitle">Get to know the person behind the code</p>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <h3>Who Am I?</h3>
+                    <p>I'm a passionate data professional with 2+ years of experience transforming raw data into actionable insights. By day, I'm a consultant at NEC Software Solutions building predictive models with 88% accuracy. By night, I'm a full-stack developer creating beautiful web applications that make people smile.</p>
                     <p>I believe in the power of code to solve problems and data to tell stories. Whether it's building a mood-tracking Flask app or architecting machine learning pipelines, I'm always excited about creating solutions that actually matter.</p>
-                    <p>When I'm not debugging code or wrestling with datasets, you'll find me speaking at tech conferences (yes, I've addressed 250+ people without fainting! 🎤), journaling my thoughts, or contemplating why my code works but I don't understand how. 😄</p>
                     <div class="fun-fact">
                         🎯 Fun Fact: I once built a sentiment analysis model that was 90% accurate... right up until my boss used it. Then it became a comedy analyzer instead! 😂
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="about-stats">
-                    <div class="stat-box">
-                        <h3>2+</h3>
-                        <p>Years in Data & Analytics</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>88%</h3>
-                        <p>Model Accuracy Record</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>40%</h3>
-                        <p>Process Automation</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>250+</h3>
-                        <p>Tech Talk Attendees</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>∞</h3>
-                        <p>Coffee Consumed</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>0</h3>
-                        <p>Bugs In My Code* (*Lies)</p>
+                <div>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>2+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>88%</h3>
+                            <p>Model Accuracy</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>40%</h3>
+                            <p>Process Automation</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>250+</h3>
+                            <p>Talk Attendees</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>∞</h3>
+                            <p>Coffee ☕</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>0</h3>
+                            <p>Bugs* (*Lies)</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Experience Section -->
         <section id="experience" class="reveal">
-            <h2>💼 Professional Experience</h2>
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <h3>Consultant - Application & Data Support</h3>
-                    <p class="company">🏢 NEC Software Solutions | Feb 2024 – Present</p>
-                    <p>• Analyzing and supporting the Indian Joint Registry application - basically I'm the detective who finds data mysteries 🔍</p>
-                    <p>• Collaborating with Data Science team to generate clinically relevant reports (translation: making doctors happy with graphs)</p>
-                    <p>• Managing data cleanup - it's like Marie Kondo but for databases ✨</p>
-                    <p>• Delivered company-wide tech talk to 250+ employees (survived without sweating too much!)</p>
-                </div>
+            <h2><span>💼 Experience</span></h2>
+            <p class="section-subtitle">My professional journey so far</p>
 
-                <div class="experience-item">
-                    <h3>Business Analyst</h3>
-                    <p class="company">📊 Ideas Four Transformation | Mar 2023 – Sep 2023</p>
-                    <p>• Conducted in-depth business analysis - Excel was my love language 💚</p>
-                    <p>• Improved client efficiency by 15% through strategic optimization (they still don't know I just asked questions and listened)</p>
-                    <p>• Designed Power BI dashboards that made executives nod knowingly even when they didn't understand</p>
-                    <p>• Facilitated stakeholder meetings - professional translator between technical and business languages</p>
-                </div>
+            <div class="experience-item">
+                <h3>Consultant - Application & Data Support</h3>
+                <p class="company">🏢 NEC Software Solutions | Feb 2024 – Present</p>
+                <p>✅ Analyzing and supporting the Indian Joint Registry application</p>
+                <p>✅ Generating clinically relevant reports for medical professionals</p>
+                <p>✅ Managing data cleanup and integrity processes</p>
+                <p>✅ Delivered tech talk to 250+ employees on data science</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Business Analyst</h3>
+                <p class="company">📊 Ideas Four Transformation | Mar 2023 – Sep 2023</p>
+                <p>✅ Analyzed business performance across 5+ clients</p>
+                <p>✅ Improved operational efficiency by 15% through optimization</p>
+                <p>✅ Designed comprehensive Power BI dashboards</p>
+                <p>✅ Led requirement gathering and stakeholder meetings</p>
             </div>
         </section>
 
+        <!-- Skills Section -->
         <section id="skills" class="reveal">
-            <h2>🛠️ My Skills</h2>
+            <h2><span>🛠️ My Skills</span></h2>
+            <p class="section-subtitle">Technologies and tools I work with</p>
+            
             <div class="skills-grid">
                 <div class="skill-card">
                     <i class="fab fa-python"></i>
                     <h3>Python</h3>
-                    <p>Advanced Python development - writing code that's almost as good as my coffee-making skills</p>
+                    <p>Advanced development with clean, efficient code and best practices</p>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-flask"></i>
                     <h3>Flask & Web Dev</h3>
-                    <p>Building beautiful web applications that don't crash (most of the time 😅)</p>
+                    <p>Building scalable web applications that actually work</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-chart-bar"></i>
                     <h3>Data Science & ML</h3>
-                    <p>XGBoost, Random Forest, Classification - making predictions that are sometimes right</p>
+                    <p>XGBoost, Random Forest, Classification - making predictions</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-database"></i>
                     <h3>SQL & Databases</h3>
-                    <p>SQL queries so complex even I forget what they do. SQLite, MongoDB, AWS S3</p>
+                    <p>SQLite, MongoDB, AWS S3 - managing data like a pro</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-chart-pie"></i>
                     <h3>BI & Visualization</h3>
-                    <p>Power BI, Tableau, Advanced Excel - turning boring data into beautiful art</p>
+                    <p>Power BI, Tableau, Excel - turning data into art</p>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-git"></i>
                     <h3>Git & DevTools</h3>
-                    <p>Git, GitHub, Jupyter, Streamlit - tools that occasionally forgive my mistakes</p>
+                    <p>GitHub, Jupyter, Streamlit - making collaboration easy</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-microchip"></i>
                     <h3>ML Frameworks</h3>
-                    <p>Scikit-learn, TensorFlow, Pandas, NumPy - the real MVPs of my career</p>
+                    <p>Scikit-learn, TensorFlow, Pandas, NumPy - the real MVPs</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-cloud"></i>
                     <h3>Cloud & APIs</h3>
-                    <p>AWS, REST APIs, ETL Pipelines - connecting the digital world together</p>
+                    <p>AWS, REST APIs, ETL Pipelines - connecting systems</p>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section id="projects" class="reveal">
-            <h2>🎯 Featured Projects</h2>
+            <h2><span>🎯 Featured Projects</span></h2>
+            <p class="section-subtitle">Check out what I've been building</p>
             
             <div class="project-card">
-                <h3>⭐ Mental Wellness Journal - Flask & Data Analytics</h3>
-                <p>A full-stack web application that helps people track their mood and journal their thoughts (basically a therapist you don't have to pay 😄). Features real-time analytics, mood trend visualization using Matplotlib & Seaborn, data export to CSV, and inspirational quotes that actually help. This project combines my love for mental health AND coding!</p>
+                <h3>⭐ Mental Wellness Journal</h3>
+                <p>A full-stack web application for tracking daily mood and journaling with real-time analytics and mood trend visualization. Features mood tracking, data export, and inspirational quotes.</p>
                 <div class="tech-tags">
                     <span class="badge">🐍 Python</span>
                     <span class="badge">⚡ Flask</span>
                     <span class="badge">💾 SQLite</span>
                     <span class="badge">📊 Analytics</span>
-                    <span class="badge">🎨 HTML/CSS</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://mental-wellness-journal-production.up.railway.app" target="_blank" class="btn btn-primary">🚀 Try the App</a>
-                    <a href="https://github.com/rheatiwari/mental-wellness-journal" target="_blank" class="btn btn-secondary">💻 View Code</a>
+                    <a href="https://mental-wellness-journal-production.up.railway.app" target="_blank" class="btn btn-primary">🚀 Try Live</a>
+                    <a href="https://github.com/rheatiwari/mental-wellness-journal" target="_blank" class="btn btn-secondary">💻 Code</a>
                 </div>
             </div>
 
             <div class="project-card">
-                <h3>⭐ Customer Churn Prediction Model - ML Magic</h3>
-                <p>Built a machine learning model that predicts customer churn with 88% accuracy using Random Forest and XGBoost. Created an interactive Streamlit dashboard so non-technical stakeholders could understand predictions without needing a PhD in Data Science. Basically saved the company thousands by identifying customers about to leave BEFORE they leave!</p>
+                <h3>⭐ Customer Churn Prediction Model</h3>
+                <p>Machine learning model predicting customer churn with 88% accuracy using XGBoost and Random Forest. Interactive Streamlit dashboard for real-time insights.</p>
                 <div class="tech-tags">
                     <span class="badge">🤖 XGBoost</span>
                     <span class="badge">🌲 Random Forest</span>
                     <span class="badge">📊 Pandas</span>
                     <span class="badge">✨ Streamlit</span>
-                    <span class="badge">📈 Model Eval</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-primary">🔮 See Predictions</a>
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">📚 Read Report</a>
+                    <a href="#contact" class="btn btn-primary">🔮 Learn More</a>
+                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">📚 Details</a>
                 </div>
             </div>
 
             <div class="project-card">
-                <h3>⭐ Hospital Operations Dashboard - Power BI</h3>
-                <p>Designed a comprehensive Power BI dashboard analyzing patient flow, operational metrics, and resource utilization. Automated weekly reporting procedures reducing manual work by 25 hours per week (that's basically a whole work day of free time! ⏰). Made hospital administrators smile for the first time in years.</p>
+                <h3>⭐ Hospital Operations Dashboard</h3>
+                <p>Comprehensive Power BI dashboard analyzing patient flow and resource utilization. Automated reporting reducing manual work by 25 hours per week.</p>
                 <div class="tech-tags">
                     <span class="badge">📊 Power BI</span>
                     <span class="badge">📈 Analytics</span>
                     <span class="badge">⚙️ Automation</span>
-                    <span class="badge">🏥 Healthcare</span>
                 </div>
                 <div class="project-links">
-                    <a href="#contact" class="btn btn-primary">📊 See Dashboard</a>
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">💾 Data Details</a>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>⭐ Sentiment Analysis System - NLP & Flask</h3>
-                <p>Created a text classification model with 90% accuracy for analyzing patient feedback using NLP techniques. Integrated into a Flask web application for real-time sentiment tracking. Turns customer reviews into actionable insights - basically I taught a computer to understand human emotions better than humans do! 😄</p>
-                <div class="tech-tags">
-                    <span class="badge">🗣️ NLP</span>
-                    <span class="badge">⚡ Flask</span>
-                    <span class="badge">🤖 ML</span>
-                    <span class="badge">📝 Text Analysis</span>
-                </div>
-                <div class="project-links">
-                    <a href="#contact" class="btn btn-primary">💬 Try Demo</a>
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">📚 Code</a>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>⭐ Expense Tracking Application - Desktop App</h3>
-                <p>Built a user-friendly desktop application using Tkinter with real-time expense categorization and budget tracking. Perfect for people who want to know where their money goes (spoiler: coffee ☕ and tech gadgets 🎮)</p>
-                <div class="tech-tags">
-                    <span class="badge">🐍 Tkinter</span>
-                    <span class="badge">💰 Finance</span>
-                    <span class="badge">📊 Tracking</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-primary">💻 Download</a>
-                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">📖 Tutorial</a>
+                    <a href="#contact" class="btn btn-primary">📊 View</a>
+                    <a href="https://github.com/rheatiwari" target="_blank" class="btn btn-secondary">Data</a>
                 </div>
             </div>
         </section>
 
-        <section id="certifications" class="reveal">
-            <h2>🏆 Certifications & Achievements</h2>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-                <div style="background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--primary);">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">📜 Certifications</h3>
-                    <ul style="list-style: none; color: #555;">
-                        <li>✅ Data Science with Python (Simplilearn)</li>
-                        <li>✅ Business Analyst Certification (PMI)</li>
-                        <li>✅ Data Analytics & Visualization (Accenture)</li>
-                    </ul>
-                </div>
-
-                <div style="background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%); padding: 2rem; border-radius: 15px; border-left: 4px solid var(--secondary);">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">🌟 Leadership & Speaking</h3>
-                    <ul style="list-style: none; color: #555;">
-                        <li>🎤 Tech Speaker: "How Data Science Transforms Decision-Making" (250+ attendees)</li>
-                        <li>🎯 Conference Coordinator: ISHKS 2025 International Medical Conference (900+ global participants)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="fun-fact">
-                💡 Pro Tip: I once coordinated a conference with 900+ global participants while simultaneously debugging a Python script. Multitasking level: Expert 🚀
-            </div>
-        </section>
-
-        <section id="education" class="reveal">
-            <h2>🎓 Education</h2>
-            
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <h3>Master of Computer Applications (MCA)</h3>
-                    <p class="company">📚 Bharati Vidyapeeth University | Expected Mar 2026</p>
-                    <p><strong>Relevant Project:</strong> Expense Tracking Application (Tkinter) - Built a user-friendly desktop application with real-time expense categorization and budget tracking functionality</p>
-                </div>
-
-                <div class="experience-item">
-                    <h3>Bachelor of Computer Applications (BCA)</h3>
-                    <p class="company">🎓 Bharati Vidyapeeth University | Graduated 2021</p>
-                    <p><strong>Relevant Project:</strong> Mental Wellness Analytics (Python/Flask) - Developed mood tracking system with trend analysis and personalized insights using data visualization</p>
-                </div>
-            </div>
-        </section>
-
+        <!-- Contact Section -->
         <section class="contact" id="contact" class="reveal">
-            <h2>📞 Let's Connect & Collaborate!</h2>
-            <p style="font-size: 1.1rem; margin: 1.5rem 0; color: #555;">I'm always interested in hearing about new projects, opportunities, and ideas. Whether you want to discuss data science, web development, or just chat about why debugging is a personality trait, I'm here for it! 😊</p>
-            
-            <div class="fun-fact">
-                🎯 Fair Warning: I respond to emails like I respond to coffee - immediately and enthusiastically! ☕⚡
-            </div>
-            
-            <p><strong>📧 Email:</strong> <a href="mailto:triya0208@gmail.com">triya0208@gmail.com</a> (personal) | <a href="mailto:Rheatiwari2@gmail.com">Rheatiwari2@gmail.com</a> (professional)</p>
-            <p><strong>📱 Phone:</strong> <a href="tel:8454078250">8454078250</a></p>
-            <p><strong>🐙 GitHub:</strong> <a href="https://github.com/rheatiwari" target="_blank">github.com/rheatiwari</a></p>
-            <p><strong>💼 LinkedIn:</strong> <a href="https://linkedin.com/in/riyatiwarii" target="_blank">linkedin.com/in/riyatiwarii</a></p>
-            <p><strong>📍 Location:</strong> Thane, Maharashtra, India 🇮🇳</p>
-            
-            <div class="social-links">
-                <a href="https://github.com/rheatiwari" class="social-icon" title="GitHub" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/riyatiwarii" class="social-icon" title="LinkedIn" target="_blank">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:triya0208@gmail.com" class="social-icon" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="tel:8454078250" class="social-icon" title="Phone">
-                    <i class="fas fa-phone"></i>
-                </a>
-            </div>
-        </section>
-
-        <section style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center;">
-            <h2 style="color: white; border-color: white;">✨ One More Thing...</h2>
-            <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.2rem;">I believe in the power of technology to transform lives. Whether it's through predictive analytics that save businesses millions, or a mental wellness app that helps someone through a tough day, I'm here to make a difference. 💜</p>
-            <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.1rem; margin-top: 1.5rem;">"Great code is like great art - it works perfectly and looks beautiful doing it." 🎨💻</p>
-        </section>
-    </div>
-
-    <footer>
-        <p>💜 Made with ☕, 🎨, and 💻 by Riya Tiwari | © 2025 All rights reserved</p>
-        <p style="margin-top: 0.5rem; opacity: 0.9;">Turning data into insights, code into magic ✨</p>
-    </footer>
-
-    <script>
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        revealElements.forEach(el => observer.observe(el));
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            <h2><span>📞 Let's Connect!</span></h2>
+            <p class="section-subtitle">I'd love
